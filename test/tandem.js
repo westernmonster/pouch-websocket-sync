@@ -54,7 +54,7 @@ describe('pouch-websocket-sync', function() {
     });
 
     it('can be made to sync', function(done) {
-      var sync = client.sync(db, { credentials: { token: 'some token'}});
+      var sync = client.sync(db, { remoteName: 'todos-server',credentials: { token: 'some token'}});
       sync.on('error', function(err) {
         expect(err.message).to.equal('no database event listener on server');
         sync.cancel();
@@ -77,7 +77,7 @@ describe('pouch-websocket-sync', function() {
       });
 
       client.connect('ws://localhost:' + port);
-      var sync = client.sync(db, { credentials: { token: 'some token'}});
+      var sync = client.sync(db, { remoteName: 'todos-server',credentials: { token: 'some token'}});
 
       sync.on('error', function(err) {
         expect(err.message).to.equal('go away');
